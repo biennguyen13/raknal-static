@@ -25,7 +25,7 @@ jobs:
           yarn install
           export MY_PATH=matsuzaki-housing
           echo $MY_PATH
-          yarn build
+          yarn dev
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
