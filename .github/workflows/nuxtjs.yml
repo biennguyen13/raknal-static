@@ -18,7 +18,7 @@ jobs:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout :bellhop_bell:
+      - name: Checkout
         uses: actions/checkout@v3
       - name: Install and Build :wrench:
         run: |
