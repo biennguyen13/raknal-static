@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install and Build :wrench:
+      - name: Install and Build
         run: |
           yarn install
           export MY_PATH=matsuzaki-housing
