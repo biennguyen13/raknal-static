@@ -110,8 +110,6 @@ const props = defineProps({
     &__main-content {
       padding: 30px 20px;
       width: 310px;
-      h3 {
-      }
     }
 
     &__box {

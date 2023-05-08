@@ -122,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-import VirtualStaging01 from "~/assets/images/VirtualStaging01.png"
+import VirtualStaging01 from "~/assets/images/VirtualStaging01.png";
 
 const state = reactive({
   caseStudy: [
@@ -177,7 +177,7 @@ const state = reactive({
       price: 25000,
     },
   ],
-})
+});
 </script>
 
 <style scoped lang="scss">

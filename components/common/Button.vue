@@ -5,37 +5,53 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["onClick"])
+const emit = defineEmits(["onClick"]);
 const props = defineProps({
   type: {
     type: String,
     validator(value: string) {
-      return ["primary", "secondary", "tertiary"].includes(value)
+      return ["primary", "secondary", "tertiary"].includes(value);
     },
     default: "primary",
   },
-})
+  roundedType: {
+    type: String,
+    validator(value: string) {
+      return ["rounded", "full-rounded"].includes(value);
+    },
+    default: "full-rounded",
+  },
+});
 
 const classes = computed(() => {
   return {
     [props.type]: true,
-  }
-})
+    [props.roundedType]: true,
+  };
+});
 
 const handler = {
   onClick: (e: Event) => {
-    emit("onClick")
+    emit("onClick");
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 button {
-  @apply font-bold rounded-full  flex justify-center items-center px-3 h-[52px];
+  @apply font-bold flex justify-center items-center px-3 h-[52px];
+
+  &.full-rounded {
+    @apply rounded-full;
+  }
+
+  &.rounded {
+    border-radius: 8px;
+  }
 }
 
 .primary {
-  @apply bg-rak-blue-1 font-bold rounded-full text-white flex justify-center items-center px-3;
+  @apply bg-rak-blue-1 font-bold text-white flex justify-center items-center px-3;
   &:hover {
     @apply bg-rak-blue-1/92;
   }

@@ -1,33 +1,45 @@
 <template>
-  <p class="font-bold underline">Button</p>
-  <CommonButton @onClick="onClick" disabled class="w-[150px] min-w-0"
-    >ボタン</CommonButton
-  >
-  <CommonButton @onClick="onClick" small type="secondary">ボタン</CommonButton>
-  <CommonButton @onClick="onClick" smaller type="tertiary">ボタン</CommonButton>
-  <p class="font-bold underline">Slide</p>
-  <Slide />
-  <p class="font-bold underline">Heading</p>
-  <CommonHeading>サービス概要</CommonHeading>
-  <CommonHeading number="1" html-tag="h2">サービス概要</CommonHeading>
+  <section class="sale-support page">
+    <!-- hero banner -->
+    <HeroBanner />
 
-  <p class="font-bold underline">Table</p>
-  <CommonTable></CommonTable>
-  <p class="font-bold underline">Gallery</p>
-  <CommonGallery />
-  <p class="font-bold underline">Grid 導入事例</p>
-  <CommonGrid :datas="state.caseStudy" />
-  <p class="font-bold underline">Grid おすすめのサービス</p>
-  <CommonGrid :datas="state.caseStudy2" />
+    <!-- service -->
+    <Service />
+
+    <!-- support -->
+    <section class="support">
+      <div class="support__heading">
+        <div class="container mx-auto py-4">
+          <div class="service-detail-page__inner__recommended-service">
+            <div class="flex justify-between items-center">
+              <CommonHeading>ラクナルの売却支援コンテンツ</CommonHeading>
+              <CommonButton type="secondary" small>サービス一覧へ</CommonButton>
+            </div>
+            <CommonGrid :rowCols="3" :datas="state.caseStudy2" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact form -->
+    <ContactForm class="mt-[70px]" />
+  </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import HeroBanner from "~/components/Hero/";
+import Service from "~/components/Service/";
 import VirtualStaging01 from "~/assets/images/VirtualStaging01.png";
 
-definePageMeta({
-  layout: "default",
-});
+export default {
+  components: {
+    HeroBanner,
+    Service,
+  },
+};
+</script>
 
+<script lang="ts" setup>
 const state = reactive({
   caseStudy: [
     {
@@ -80,8 +92,13 @@ const state = reactive({
       title: "プロカメラマン撮影",
       price: 25000,
     },
+    {
+      image: VirtualStaging01,
+      title: "プロカメラマン撮影",
+      price: 25000,
+    },
   ],
 });
-
-const onClick = () => {};
 </script>
+
+<style></style>

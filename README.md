@@ -33,12 +33,6 @@ Build the application for production:
 npm run build
 ```
 
-Build the application for static:
-
-```bash
-npm run generate
-```
-
 Locally preview production build:
 
 ```bash
