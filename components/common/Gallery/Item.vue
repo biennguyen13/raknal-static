@@ -33,8 +33,48 @@
         <p class="headline-m">{{ props.title }}</p>
         <p class="headline-m">￥{{ props.price }}~</p>
       </div>
-      <CommonGalleryButton class="flex-shrink-0">拡大表示</CommonGalleryButton>
+      <CommonGalleryButton
+        @click="props.iframe && handler.openModal()"
+        class="flex-shrink-0"
+      >
+        拡大表示
+      </CommonGalleryButton>
     </div>
+
+    <Modal v-model="state.isShowModal">
+      <div class="w-full aspect-modal-image rounded-3xl overflow-hidden">
+        <iframe
+          width="100%"
+          height="100%"
+          :src="props.iframe"
+          frameborder="0"
+        ></iframe>
+      </div>
+
+      <div class="mt-5 rounded-3xl bg-white px-6 py-4">
+        <div class="flex flex-wrap">
+          <CommonButton x-smaller type="tertiary" class="mb-2 mr-2">
+            バーチャルステージング
+          </CommonButton>
+          <CommonButton x-smaller type="btn-4" class="mb-2 mr-2"
+            >その他室内</CommonButton
+          >
+          <CommonButton x-smaller type="btn-4" class="mb-2"
+            >家具の置き換え</CommonButton
+          >
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <div class="mb-4">
+            <p class="text-2xl font-bold">{{ props.title }}</p>
+            <p class="text-lg font-bold">￥{{ props.price }}~</p>
+          </div>
+          <CommonButton small class="w-full sm:w-[204px]">
+            <CommonIconsLink class="close" />
+            リンクをコピー
+          </CommonButton>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -56,11 +96,15 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  iframe: {
+    type: String,
+  },
 })
 
 const beforeImage = ref()
 
 const state = reactive({
+  isShowModal: false,
   height: 0,
   width: 0,
 })
@@ -88,6 +132,12 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", reportWindowSize)
 })
+
+const handler = {
+  openModal() {
+    state.isShowModal = true
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -119,6 +169,12 @@ onUnmounted(() => {
       @apply text-rak-blue-1;
       display: initial;
     }
+  }
+}
+
+.close:deep {
+  path {
+    fill: white;
   }
 }
 </style>

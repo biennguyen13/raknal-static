@@ -2,11 +2,11 @@
   <div class="panel rounded-3xl p-5 bg-rak-blue-4">
     <p class="text-black/60 font-bold text-sm">料金</p>
     <p class="text-rak-black font-bold text-lg">
-      ¥{{ props.price }}円（税込）/枚~
+      {{ props.price }}
     </p>
     <common-devide class="mt-0" />
     <p class="text-black/60 font-bold text-sm">納期</p>
-    <p class="text-rak-black font-bold text-lg">約{{ props.days }}営業日</p>
+    <p class="text-rak-black font-bold text-lg">{{ props.days }}</p>
     <CommonButton class="w-full" small>ログインして発注</CommonButton>
     <CommonButton class="w-full" small type="secondary">
       お問い合わせ
@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 const props = defineProps({
-  price: { type: Number, required: true },
-  days: { type: Number, required: true },
+  price: { type: String, required: true },
+  days: { type: String, required: true },
 })
 </script>
 

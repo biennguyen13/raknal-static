@@ -3,14 +3,14 @@
     <!-- desktop header -->
     <div class="py-[12px] hidden md:block header-desktop-wrapper">
       <nav
-        class="header-wrapper hidden md:flex container mx-auto items-center justify-between"
+        class="header-wrapper flex container mx-auto items-center justify-between"
       >
-        <div class="header__logo">
+        <div class="header__logo md:w-[100px] lg:w-auto">
           <img src="/images/rakunal-logo.svg" alt="rakunal-logo" />
         </div>
         <ul class="header__links flex items-center">
           <li
-            class="header__link ml-[32px] flex items-center"
+            class="header__link ml-[32px] flex items-center md:text-[10px] lg:text-[16px]"
             :class="{ active: megaMenuActive }"
             @click="handleToggleMegaMenu"
           >
@@ -20,13 +20,19 @@
             </span>
           </li>
           <li class="header__link ml-[32px]">
-            <NuxtLink to="/">利用シーンで探す</NuxtLink>
+            <NuxtLink class="md:text-[10px] lg:text-[16px]" to="/"
+              >利用シーンで探す</NuxtLink
+            >
           </li>
           <li class="header__link ml-[32px]">
-            <NuxtLink to="/">ラクナルについて</NuxtLink>
+            <NuxtLink class="md:text-[10px] lg:text-[16px]" to="/"
+              >ラクナルについて</NuxtLink
+            >
           </li>
           <li class="header__link ml-[32px]">
-            <CommonButton> ログイン </CommonButton>
+            <CommonButton class="md:text-[10px] lg:text-[16px]">
+              ログイン
+            </CommonButton>
           </li>
         </ul>
       </nav>
@@ -218,7 +224,6 @@ export default defineComponent({
     padding: 8px 12px;
     border-radius: 39px;
     transition: 0.4s;
-    font-size: 16px;
     cursor: pointer;
     &:hover {
       @apply bg-rak-blue-6/10 text-rak-blue-1;
@@ -230,6 +235,7 @@ export default defineComponent({
   }
 
   .side-nav {
+    z-index: 100000;
     position: fixed;
     top: 0;
     left: 0;

@@ -1,7 +1,7 @@
 <template>
   <div class="service-grid-item">
     <div class="service-grid-item__img">
-      <img src="/images/image.png" alt="" />
+      <img class="w-full" src="/images/image.png" alt="" />
     </div>
     <h3 class="service-grid-item__title text-[24px] my-[12px] font-bold">
       売主様入居中で物件写真が掲載できない

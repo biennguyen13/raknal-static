@@ -4,7 +4,7 @@
       {{ props.label }}
     </label>
     <span
-      v-if="props.require"
+      v-if="props.required"
       class="text-rak-blue-1 bg-white px-[8px] py-[4px] rounded-[50px]"
     >
       必須
@@ -24,9 +24,9 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  require: {
+  required: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 </script>

@@ -5,36 +5,38 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["onClick"]);
+const emit = defineEmits(["onClick"])
 const props = defineProps({
   type: {
     type: String,
     validator(value: string) {
-      return ["primary", "secondary", "tertiary"].includes(value);
+      return ["primary", "secondary", "tertiary", "btn-4", "btn-5"].includes(
+        value
+      )
     },
     default: "primary",
   },
   roundedType: {
     type: String,
     validator(value: string) {
-      return ["rounded", "full-rounded"].includes(value);
+      return ["rounded", "full-rounded"].includes(value)
     },
     default: "full-rounded",
   },
-});
+})
 
 const classes = computed(() => {
   return {
     [props.type]: true,
     [props.roundedType]: true,
-  };
-});
+  }
+})
 
 const handler = {
   onClick: (e: Event) => {
-    emit("onClick");
+    emit("onClick")
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -83,11 +85,23 @@ button {
   }
 }
 
+.btn-4 {
+  @apply text-rak-black bg-rak-gray-1;
+}
+
+.btn-5 {
+  @apply text-white bg-rak-black border;
+}
+
 [small] {
   @apply h-[44px];
 }
 
 [smaller] {
   @apply h-[36px];
+}
+
+[x-smaller] {
+  @apply h-[32px] text-sm rounded-[50px];
 }
 </style>

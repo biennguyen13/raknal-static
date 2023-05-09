@@ -1,33 +1,49 @@
 <template>
   <div class="slide">
-    <div class="slide__container">
-      <img :src="activeImage" alt="some alt text" />
+    <div class="slide__container rounded-3xl overflow-hidden relative">
+      <img
+        :src="state.slideItems[state.activeIndex].src"
+        alt="some alt text"
+        class="aspect-slider-image"
+      />
+      <iframe
+        v-if="props.iframe"
+        v-show="state.activeIndex == 1"
+        class="absolute top-0 left-0 w-full h-full"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        :src="props.iframe"
+      ></iframe>
     </div>
 
-    <div class="slide__items mt-[12px] flex justify-between">
-      <SlideItem
-        :item="item"
-        v-for="(item, index) in slideItems"
-        :key="index"
-        @click="handleChangeSlide(index)"
-      />
+    <div class="slide__items mt-[12px] flex">
+      <div class="flex justify-start gap-2 mr-2">
+        <SlideItem
+          :item="item"
+          v-for="(item, index) in state.slideItems"
+          :key="index"
+          @click="handleChangeSlide(index)"
+        />
+      </div>
 
-      <div
-        class="slide__next-btn flex justify-center items-center"
-        @click="handleGoToNextSlide"
+      <button
+        :disabled="propsItems.length <= 5"
+        class="slide__next-btn flex justify-center items-center flex-shrink-0"
+        @click="handleLoadMore"
       >
         <span>
           <ChevronRight />
         </span>
-      </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import ChevronRight from "~/components/common/icons/ChevronRight.vue";
-import Expand from "~/components/common/icons/Expand.vue";
-import SlideItem from "~/components/Slide/SlideItem.vue";
+import ChevronRight from "~/components/common/icons/ChevronRight.vue"
+import Expand from "~/components/common/icons/Expand.vue"
+import SlideItem from "~/components/Slide/SlideItem.vue"
 
 export default {
   name: "Slide",
@@ -36,67 +52,47 @@ export default {
     Expand,
     SlideItem,
   },
-};
+}
 </script>
 
 <script setup lang="ts">
-const slideItems = ref<{ src: string; active: boolean }[]>([
-  {
-    src: "http://placehold.it/2000x1000",
-    active: true,
+const props = defineProps({
+  items: {
+    type: Array,
+    required: true,
   },
-
-  {
-    src: "http://placehold.it/2000x1000",
-    active: false,
+  iframe: {
+    type: String,
   },
-  {
-    src: "http://placehold.it/2000x1000",
-    active: false,
-  },
-  {
-    src: "http://placehold.it/2000x1000",
-    active: false,
-  },
-  {
-    src: "http://placehold.it/2000x1000",
-    active: false,
-  },
-]);
+})
 
-const activeImage = ref<string>(slideItems.value[0].src);
+const propsItems = props.items.map((item) => ({ src: item, active: false }))
+if (propsItems[0]) {
+  propsItems[0].active = true
+}
 
-const handleUpdateActiveSlide = (index: number) => {
-  const newSlideItems = [...slideItems.value];
-
-  newSlideItems.map((item, iIdx) => {
-    if (iIdx === index) {
-      item.active = true;
-    } else {
-      item.active = false;
-    }
-    return item;
-  });
-
-  slideItems.value = newSlideItems;
-};
+const state = reactive({
+  activeIndex: 0,
+  slideItems: propsItems.length > 5 ? propsItems.slice(0, 5) : propsItems,
+})
 
 const handleChangeSlide = (index: number) => {
-  activeImage.value = slideItems.value[index].src;
+  state.slideItems[state.activeIndex].active = false
+  state.slideItems[index].active = true
+  state.activeIndex = index
+}
 
-  handleUpdateActiveSlide(index);
-};
+const handleLoadMore = () => {
+  const indexOf = propsItems.findIndex(
+    (item) => item.src === state.slideItems[4].src
+  )
 
-const handleGoToNextSlide = () => {
-  const currentSlideIndex = slideItems.value.findIndex((item) => item.active);
-
-  let nextSlideIndex = currentSlideIndex + 1;
-  if (nextSlideIndex === slideItems.value.length) {
-    nextSlideIndex = 0;
+  if (indexOf < propsItems.length - 1) {
+    state.slideItems = propsItems.slice(indexOf - 3, indexOf - 3 + 5)
+  } else {
+    state.slideItems = propsItems.slice(0, 5)
   }
-
-  handleChangeSlide(nextSlideIndex);
-};
+}
 </script>
 
 <style lang="scss">
@@ -106,13 +102,6 @@ const handleGoToNextSlide = () => {
     height: 100%;
     vertical-align: middle;
     border-radius: 10px;
-  }
-  &__container {
-    height: 426px;
-    border-radius: 20px;
-    img {
-      border-radius: 20px;
-    }
   }
 
   &__next-btn {

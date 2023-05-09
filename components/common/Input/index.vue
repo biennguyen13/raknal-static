@@ -1,12 +1,10 @@
 <template>
   <div class="form-input">
     <input
-      :value="props.value"
+      v-model="value"
       :type="props.type"
       :name="props.name"
       :placeholder="props.placeHolder"
-      @input="onInput"
-      @keydown="onKeyDown"
     />
   </div>
 </template>
@@ -20,12 +18,11 @@ const props = defineProps({
   type: {
     type: String,
     default: "text",
-    required: true,
     validator: (val: string) => {
       return ["text", "password", "number", "date", "time"].indexOf(val) !== -1;
     },
   },
-  value: {
+  modelValue: {
     type: String,
     default: "",
   },
@@ -39,11 +36,16 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["input"]);
+const emit = defineEmits(["update:modelValue"]);
 
-const onInput = (evt: any) => {
-  emit("input", evt.target.value, props.name);
-};
+let value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value: string) {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <style lang="scss">

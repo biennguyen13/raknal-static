@@ -3,13 +3,13 @@
     <label v-for="r in radioDataArray" :key="r.value">
       <input
         type="radio"
-        :name="props.groupName"
         :value="r.value"
-        v-model="modelValue"
+        :name="groupName"
         :disabled="disabled"
-        @change="$emit('input', modelValue)"
+        @change="$emit('input', $event)"
       />
-      <span class="text-white">{{ r.label }}</span>
+      <span class="check-box"> </span>
+      <span class="text-white label">{{ r.label }}</span>
     </label>
   </div>
 </template>
@@ -39,6 +39,10 @@ const props = defineProps({
     type: Array as PropType<IRadioData[]>,
     default: () => [],
   },
+  disable: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const classes = computed(() => {
@@ -52,15 +56,34 @@ const classes = computed(() => {
 .radio-group {
   label {
     display: flex;
+    position: relative;
     &:not(:first-child) {
       margin-top: 1.2rem;
     }
     cursor: pointer;
     input {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
       cursor: pointer;
-      border: 2px solid #ffffff;
+
+      input:checked::before {
+        background: black;
+      }
     }
-    span {
+
+    input:checked ~ span.check-box {
+      @apply bg-white;
+    }
+
+    span.check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+
+    span.label {
       margin-left: 8px;
       font-size: 16px;
     }

@@ -1,5 +1,12 @@
 <template>
   <section class="sale-support page">
+    <div class="z-10 relative container mx-auto">
+      <div class="flex body-s-bold text-rak-black h-[56px] items-center">
+        <NuxtLink to="">TOP</NuxtLink>
+        / <NuxtLink to="">利用シーンで探す</NuxtLink>/
+        <NuxtLink to="" class="text-rak-blue-1">売却支援パッケージ</NuxtLink>
+      </div>
+    </div>
     <!-- hero banner -->
     <HeroBanner />
 
@@ -27,16 +34,16 @@
 </template>
 
 <script lang="ts">
-import HeroBanner from "~/components/Hero/";
-import Service from "~/components/Service/";
-import VirtualStaging01 from "~/assets/images/VirtualStaging01.png";
+import HeroBanner from "~/components/Hero/"
+import Service from "~/components/Service/"
+import VirtualStaging01 from "~/assets/images/VirtualStaging01.png"
 
 export default {
   components: {
     HeroBanner,
     Service,
   },
-};
+}
 </script>
 
 <script lang="ts" setup>
@@ -98,7 +105,7 @@ const state = reactive({
       price: 25000,
     },
   ],
-});
+})
 </script>
 
 <style></style>

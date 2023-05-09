@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 export default <Partial<Config>>{
   content: [
@@ -39,6 +39,10 @@ export default <Partial<Config>>{
       video: "16 / 9",
       "gallery-image": "560 / 341",
       "grid-image": "264 / 148",
+      "slider-image": "757 / 426",
+      "slider-images": "137 / 77",
+      "slider-images-sp": "99 / 64",
+      "modal-image": "800 / 450",
     },
     backdropBlur: ({ theme }) => theme("blur"),
     backdropBrightness: ({ theme }) => theme("brightness"),
@@ -188,6 +192,7 @@ export default <Partial<Config>>{
         1: "#E5EBEF",
         2: "#F7F9FA",
         3: "#2F3544",
+        4: "#F5F5F5",
       },
       "rak-red": { 1: "#FFD0D4", 2: "#EE3D4A", 3: "#E31010" },
       "rak-green": { 1: "#09A198" },
@@ -1037,4 +1042,4 @@ export default <Partial<Config>>{
     },
   },
   plugins: [],
-};
+}
